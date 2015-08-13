@@ -61,7 +61,7 @@ function startup_reloaded_pricing_caps() {
 	$role_admin->add_cap( 'edit_pricing' );
 	$role_admin->add_cap( 'read_pricing' );
 	$role_admin->add_cap( 'delete_pricing' );
-	$role_admin->add_cap( 'edit_otherspricings' );
+	$role_admin->add_cap( 'edit_others_pricings' );
 	$role_admin->add_cap( 'publish_pricings' );
 	$role_admin->add_cap( 'edit_pricings' );
 	$role_admin->add_cap( 'read_private_pricings' );
