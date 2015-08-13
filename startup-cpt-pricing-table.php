@@ -42,17 +42,41 @@ function startup_reloaded_pricing() {
 		'has_archive'         => true,
 		'exclude_from_search' => true,
 		'publicly_queryable'  => true,
-		'capability_type'     => 'page'
+        'capability_type'     => array('pricing','pricings'),
+        'map_meta_cap'        => true
 	);
 	register_post_type( 'pricing', $args );
 
 }
 add_action( 'init', 'startup_reloaded_pricing', 0 );
 
-// Metaboxes
-add_action( 'cmb2_init', 'startup_reloaded_metabox_pricing' );
+// Capabilities
 
-function startup_reloaded_metabox_pricing() {
+register_activation_hook( __FILE__, 'startup_reloaded_pricing_caps' );
+
+function startup_reloaded_pricing_caps() {
+	
+	$role_admin = get_role( 'administrator' );
+	
+	$role_admin->add_cap( 'edit_pricing' );
+	$role_admin->add_cap( 'read_pricing' );
+	$role_admin->add_cap( 'delete_pricing' );
+	$role_admin->add_cap( 'edit_otherspricings' );
+	$role_admin->add_cap( 'publish_pricings' );
+	$role_admin->add_cap( 'edit_pricings' );
+	$role_admin->add_cap( 'read_private_pricings' );
+	$role_admin->add_cap( 'delete_pricings' );
+	$role_admin->add_cap( 'delete_private_pricings' );
+	$role_admin->add_cap( 'delete_published_pricings' );
+	$role_admin->add_cap( 'delete_others_pricings' );
+	$role_admin->add_cap( 'edit_private_pricings' );
+	$role_admin->add_cap( 'edit_published_pricings' );
+}
+
+// Metaboxes
+add_action( 'cmb2_init', 'startup_reloaded_pricing_meta' );
+
+function startup_reloaded_pricing_meta() {
     require get_template_directory() . '/inc/font-awesome.php';
 
 	// Start with an underscore to hide fields from custom fields list
