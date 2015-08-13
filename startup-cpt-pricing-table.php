@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: StartUp Pricing Table Custom Post
-Description: Le plugin pour lactiver le Custom Post Pricing Table
+Description: Le plugin pour activer le Custom Post Pricing Table
 Author: Yann Caplain
-Version: 0.1
+Version: 1.0
 */
 
 //CPT
