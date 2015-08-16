@@ -3,7 +3,7 @@
 Plugin Name: StartUp Pricing Table Custom Post
 Description: Le plugin pour activer le Custom Post Pricing Table
 Author: Yann Caplain
-Version: 1.0.0
+Version: 1.1.0
 */
 
 //CPT
