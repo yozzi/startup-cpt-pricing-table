@@ -210,7 +210,7 @@ function startup_reloaded_pricing_meta() {
 	) );
 }
 
-add_action( 'cmb2_init', 'startup_reloaded_pricing_meta' );
+add_action( 'cmb2_admin_init', 'startup_reloaded_pricing_meta' );
 
 // Shortcode
 add_shortcode( 'pricing', function( $atts, $content= null ){
