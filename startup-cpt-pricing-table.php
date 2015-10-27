@@ -74,7 +74,7 @@ function startup_reloaded_pricing() {
 
 add_action( 'init', 'startup_reloaded_pricing', 0 );
 
-//Flusher les permalink à l'activation du plgin pour qu'ils fonctionnent sans mise à jour manuelle
+//Flusher les permalink à l'activation du plugin pour qu'ils fonctionnent sans mise à jour manuelle
 function startup_reloaded_pricing_rewrite_flush() {
     startup_reloaded_pricing();
     flush_rewrite_rules();
