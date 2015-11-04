@@ -215,7 +215,7 @@ add_action( 'cmb2_admin_init', 'startup_reloaded_pricing_meta' );
 // Shortcode
 add_shortcode( 'pricing', function( $atts, $content= null ){
     ob_start();
-    require get_template_directory() . '/inc/shortcodes/pricing.php';
+    require get_template_directory() . '/template-parts/content-pricing.php';
     return ob_get_clean();
 });
 ?>
