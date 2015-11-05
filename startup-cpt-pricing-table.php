@@ -214,9 +214,17 @@ function startup_reloaded_pricing_meta() {
 add_action( 'cmb2_admin_init', 'startup_reloaded_pricing_meta' );
 
 // Shortcode
-add_shortcode( 'pricing', function( $atts, $content= null ){
-    ob_start();
-    require get_template_directory() . '/template-parts/content-pricing.php';
-    return ob_get_clean();
-});
+function startup_reloaded_pricing_shortcode( $atts ) {
+
+	// Attributes
+    $atts = shortcode_atts(array(
+            'bg' => ''
+        ), $atts);
+    
+	// Code
+        ob_start();
+        require get_template_directory() . '/template-parts/content-pricing.php';
+        return ob_get_clean();    
+}
+add_shortcode( 'pricing', 'startup_reloaded_pricing_shortcode' );
 ?>
