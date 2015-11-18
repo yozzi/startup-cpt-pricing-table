@@ -227,4 +227,11 @@ function startup_reloaded_pricing_shortcode( $atts ) {
         return ob_get_clean();    
 }
 add_shortcode( 'pricing', 'startup_reloaded_pricing_shortcode' );
+
+// Enqueue scripts and styles.
+function startup_cpt_pricing_scripts() {
+    wp_enqueue_style( 'startup-cpt-pricing-style', plugins_url( '/css/startup-cpt-pricing-table.css', __FILE__ ), array( ), false, 'all' );
+}
+
+add_action( 'wp_enqueue_scripts', 'startup_cpt_pricing_scripts' );
 ?>
