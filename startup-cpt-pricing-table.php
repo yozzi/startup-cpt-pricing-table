@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 //GitHub Plugin Updater
-function startup_reloaded_pricing_updater() {
+function startup_cpt_pricing_table_updater() {
 	include_once 'lib/updater.php';
 	//define( 'WP_GITHUB_FORCE_UPDATE', true );
 	if ( is_admin() ) {
@@ -34,10 +34,10 @@ function startup_reloaded_pricing_updater() {
 	}
 }
 
-//add_action( 'init', 'startup_reloaded_pricing_updater' );
+//add_action( 'init', 'startup_cpt_pricing_table_updater' );
 
 //CPT
-function startup_reloaded_pricing() {
+function startup_cpt_pricing_table() {
 	$labels = array(
 		'name'                => _x( 'Price table items', 'Post Type General Name', 'startup-cpt-pricing-table' ),
 		'singular_name'       => _x( 'Price table item', 'Post Type Singular Name', 'startup-cpt-pricing-table' ),
@@ -78,18 +78,18 @@ function startup_reloaded_pricing() {
 
 }
 
-add_action( 'init', 'startup_reloaded_pricing', 0 );
+add_action( 'init', 'startup_cpt_pricing_table', 0 );
 
 //Flusher les permalink à l'activation du plugin pour qu'ils fonctionnent sans mise à jour manuelle
-function startup_reloaded_pricing_rewrite_flush() {
-    startup_reloaded_pricing();
+function startup_cpt_pricing_table_rewrite_flush() {
+    startup_cpt_pricing_table();
     flush_rewrite_rules();
 }
 
-register_activation_hook( __FILE__, 'startup_reloaded_pricing_rewrite_flush' );
+register_activation_hook( __FILE__, 'startup_cpt_pricing_table_rewrite_flush' );
 
 // Capabilities
-function startup_reloaded_pricing_caps() {	
+function startup_cpt_pricing_table_caps() {	
 	$role_admin = get_role( 'administrator' );
 	$role_admin->add_cap( 'edit_pricing' );
 	$role_admin->add_cap( 'read_pricing' );
@@ -106,14 +106,14 @@ function startup_reloaded_pricing_caps() {
 	$role_admin->add_cap( 'edit_published_pricings' );
 }
 
-register_activation_hook( __FILE__, 'startup_reloaded_pricing_caps' );
+register_activation_hook( __FILE__, 'startup_cpt_pricing_table_caps' );
 
 // Metaboxes
-function startup_reloaded_pricing_meta() {
+function startup_cpt_pricing_table_meta() {
     require get_template_directory() . '/inc/font-awesome.php';
 
 	// Start with an underscore to hide fields from custom fields list
-	$prefix = '_startup_reloaded_pricing_';
+	$prefix = '_startup_cpt_pricing_table_';
 
 	$cmb_box = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
@@ -216,10 +216,10 @@ function startup_reloaded_pricing_meta() {
 	) );
 }
 
-add_action( 'cmb2_admin_init', 'startup_reloaded_pricing_meta' );
+add_action( 'cmb2_admin_init', 'startup_cpt_pricing_table_meta' );
 
 // Shortcode
-function startup_reloaded_pricing_shortcode( $atts ) {
+function startup_cpt_pricing_table_shortcode( $atts ) {
 
 	// Attributes
     $atts = shortcode_atts(array(
@@ -231,7 +231,49 @@ function startup_reloaded_pricing_shortcode( $atts ) {
         require get_template_directory() . '/template-parts/content-pricing.php';
         return ob_get_clean();    
 }
-add_shortcode( 'pricing', 'startup_reloaded_pricing_shortcode' );
+add_shortcode( 'pricing-table', 'startup_cpt_pricing_table_shortcode' );
+
+// Shortcode UI
+/**
+ * Detecion de Shortcake. Identique dans tous les plugins.
+ */
+if ( !function_exists( 'shortcode_ui_detection' ) ) {
+    function shortcode_ui_detection() {
+        if ( !function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
+            add_action( 'admin_notices', 'shortcode_ui_notice' );
+        }
+    }
+
+    function shortcode_ui_notice() {
+        if ( current_user_can( 'activate_plugins' ) ) {
+            echo '<div class="error message"><p>Shortcode UI plugin must be active to use fast shortcodes.</p></div>';
+        }
+    }
+
+add_action( 'init', 'shortcode_ui_detection' );
+}
+
+function startup_cpt_pricing_table_shortcode_ui() {
+
+    shortcode_ui_register_for_shortcode(
+        'pricing-table',
+        array(
+            'label' => esc_html__( 'Pricing table', 'startup-cpt-pricing-table' ),
+            'listItemImage' => 'dashicons-cart',
+            'attrs' => array(
+                array(
+                    'label' => esc_html__( 'Background', 'startup-cpt-pricing-table' ),
+                    'attr'  => 'bg',
+                    'type'  => 'color',
+                ),
+            ),
+        )
+    );
+};
+
+if ( function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
+    add_action( 'init', 'startup_cpt_pricing_table_shortcode_ui');
+}
 
 // Enqueue scripts and styles.
 function startup_cpt_pricing_scripts() {
