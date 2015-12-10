@@ -39,10 +39,10 @@ function startup_cpt_pricing_table_updater() {
 //CPT
 function startup_cpt_pricing_table() {
 	$labels = array(
-		'name'                => _x( 'Price table items', 'Post Type General Name', 'startup-cpt-pricing-table' ),
-		'singular_name'       => _x( 'Price table item', 'Post Type Singular Name', 'startup-cpt-pricing-table' ),
-		'menu_name'           => __( 'Pricing table', 'startup-cpt-pricing-table' ),
-		'name_admin_bar'      => __( 'Pricing table', 'startup-cpt-pricing-table' ),
+		'name'                => _x( 'Price Table items', 'Post Type General Name', 'startup-cpt-pricing-table' ),
+		'singular_name'       => _x( 'Price Table item', 'Post Type Singular Name', 'startup-cpt-pricing-table' ),
+		'menu_name'           => __( 'Pricing Table', 'startup-cpt-pricing-table' ),
+		'name_admin_bar'      => __( 'Pricing Table', 'startup-cpt-pricing-table' ),
 		'parent_item_colon'   => __( 'Parent Item:', 'startup-cpt-pricing-table' ),
 		'all_items'           => __( 'All Items', 'startup-cpt-pricing-table' ),
 		'add_new_item'        => __( 'Add New Item', 'startup-cpt-pricing-table' ),
@@ -258,7 +258,7 @@ function startup_cpt_pricing_table_shortcode_ui() {
     shortcode_ui_register_for_shortcode(
         'pricing-table',
         array(
-            'label' => esc_html__( 'Pricing table', 'startup-cpt-pricing-table' ),
+            'label' => esc_html__( 'Pricing Table', 'startup-cpt-pricing-table' ),
             'listItemImage' => 'dashicons-cart',
             'attrs' => array(
                 array(
