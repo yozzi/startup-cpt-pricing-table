@@ -303,5 +303,5 @@ function startup_cpt_pricing_scripts() {
     wp_enqueue_style( 'startup-cpt-pricing-style', plugins_url( '/css/startup-cpt-pricing-table.css', __FILE__ ), array( ), false, 'all' );
 }
 
-add_action( 'wp_enqueue_scripts', 'startup_cpt_pricing_scripts' );
+add_action( 'wp_enqueue_scripts', 'startup_cpt_pricing_scripts', 15 );
 ?>
