@@ -133,7 +133,7 @@ if ( !function_exists( 'cmb2_detection' ) ) {
 }
 
 function startup_cpt_pricing_table_meta() {
-    require get_template_directory() . '/inc/font-awesome.php';
+    require ABSPATH . 'wp-content/plugins/startup-cpt-pricing-table/inc/font-awesome.php';
 
 	// Start with an underscore to hide fields from custom fields list
 	$prefix = '_startup_cpt_pricing_table_';
@@ -258,7 +258,7 @@ add_shortcode( 'pricing-table', 'startup_cpt_pricing_table_shortcode' );
 
 // Shortcode UI
 /**
- * Detecion de Shortcake. Identique dans tous les plugins.
+ * Detection de Shortcake. Identique dans tous les plugins.
  */
 if ( !function_exists( 'shortcode_ui_detection' ) ) {
     function shortcode_ui_detection() {
